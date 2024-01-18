@@ -33,6 +33,7 @@
 * Daily Update - (`daily.py`) - Outputs a daily update that you can use on Slack.
   * Example
     ``` bash
+    # The name of the file that was exported by the Team Lead Dashboard     
     FORMATTED_DATA=`python3 daily.py path/to/file.csv`
     echo ${FORMATTED_DATA} | pbcopy
     # The text is now in your clipboard.
