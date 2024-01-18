@@ -6,6 +6,10 @@
     ``` bash
     JSON_DATA=`python3 read.py path/to/file.csv`
     echo ${JSON_DATA}
+
+    # Read from a list of emails separated by white space
+    JSON_DATA=`pbpaste | python3 read.py`
+    echo ${JSON_DATA}
     ```
   
 * Union - (`union.py`) - Union between two datasets that were read in with `read.py`
