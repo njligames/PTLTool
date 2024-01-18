@@ -12,7 +12,7 @@ Use cases:
    3. Copy the list of emails that are separated by whitespace from Slack
    4. Run `intersect.py` and put the results in your clipboard
       ``` bash
-      pbpaste | python3 intersection.py ${JSON_DATA} > pbcopy
+      pbpaste | python3 intersection.py $JSON_DATA | python3 write.py > pbcopy
       ```
    
 * Between two or more lists of emails given to you on Slack, find which ones are in common.
@@ -29,7 +29,7 @@ Use cases:
    ```
    3. Run `intersect.py` and put the results in your clipboard 
    ``` bash
-   python3 intersection.py ${JSON_DATA} ${JSON_DATA2} > pbcopy
+   python3 intersection.py ${JSON_DATA} ${JSON_DATA2} | python3 write.py > pbcopy
    ```
 
 ## Utilities
