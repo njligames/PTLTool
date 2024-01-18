@@ -78,4 +78,5 @@ Use cases:
     # The text is now in your clipboard.
     ```
 ## TODO Features
-[ ] - use ChatGPT to get an inspirational message for the `daily.py` script.
+[] - use ChatGPT to get an inspirational message for the `daily.py` script.
+[] - email list to slack name list
