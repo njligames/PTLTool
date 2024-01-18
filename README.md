@@ -7,27 +7,28 @@ Use cases:
    1. Download the CSV file from your (Team Lead Dashboard)[https://canary.remotasks.com/en/remoadmin/expert-management]
    2. Copy the list of emails that are separated by whitespace from Slack
    3. Read the CSV file in... 
-      ```
+      ``` bash
       JSON_DATA1=`python3 read.py path/to/file.1csv`
       ```
    5. Run `intersect.py` and put the results in your clipboard
-      ```
+      ``` bash
       pbpaste | python3 intersect.py ${JSON_DATA} > pbcopy
       ```
    
 * Between two or more lists of emails given to you on Slack, find which ones are in common.
  * Example
+   
+   1. Copy the list of emails that are separated by whitespace from Slack 
    ``` bash
-   1. Copy the list of emails that are separated by whitespace from Slack
-   ```
    JSON_DATA1=`pbpaste | python3 read.py`
    ```
-   2. Copy the list of emails that are separated by whitespace from Slack
-   ```
+   
+   2. Copy the list of emails that are separated by whitespace from Slack 
+   ``` bash
    JSON_DATA2=`pbpaste | python3 read.py`
    ```
-   3. Run intersect.py and put the results in your clipboard
-   ```
+   3. Run `intersect.py` and put the results in your clipboard 
+   ``` bash
    python3 intersect.py ${JSON_DATA} ${JSON_DATA2} > pbcopy
    ```
 
