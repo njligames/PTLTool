@@ -93,6 +93,5 @@ Use cases:
     pbpaste | python3 slack_names.py data/2024-01-18.csv | python3 write.py | pbcopy
     # The text is now in your clipboard.
     ```
-## TODO Features
-[] - use ChatGPT to get an inspirational message for the `daily.py` script.
-[] - email list to slack name list
+## TODO Features 
+[ ] - use ChatGPT to get an inspirational message for the `daily.py` script. 
