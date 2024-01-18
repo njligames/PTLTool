@@ -4,33 +4,43 @@ Use cases:
 * Given a list of emails given to you on Slack, determine if they are in your POD.
  * Example
    
-   1. Download the CSV file from your (Team Lead Dashboard)[https://canary.remotasks.com/en/remoadmin/expert-management]
+   1. Download the CSV file from your (Team Lead Dashboard)[https://canary.remotasks.com/en/remoadmin/expert-management] 
    2. Read the CSV file in... 
       ``` bash
       JSON_DATA=`python3 read.py data/2024-01-18.csv`
-      ```
-   3. Copy the list of emails that are separated by whitespace from Slack
+      ``` 
+   3. Copy the list of emails that are separated by whitespace from Slack to your clipboard. 
    4. Run `intersect.py` and put the results in your clipboard
       ``` bash
       pbpaste | python3 intersection.py $JSON_DATA | python3 write.py | pbcopy
       ```
    
-* Between two or more lists of emails given to you on Slack, find which ones are in common.
- * Example
+* Between two or more lists of emails given to you on Slack, find which ones are in common. 
+ * Example 
    
-   1. Copy the list of emails that are separated by whitespace from Slack 
+   1. Copy the list of emails that are separated by whitespace from Slack  
    ``` bash
-   JSON_DATA1=`pbpaste | python3 read.py`
-   ```
+   JSON_DATA1=`pbpaste | python3 read.py` 
+   ``` 
    
    2. Copy the list of emails that are separated by whitespace from Slack 
    ``` bash
    JSON_DATA2=`pbpaste | python3 read.py`
    ```
-   3. Run `intersect.py` and put the results in your clipboard 
+   3. Run `intersect.py` and put the results in your clipboard  
    ``` bash
    python3 intersection.py ${JSON_DATA} ${JSON_DATA2} | python3 write.py > pbcopy
    ```
+   
+* Get a list of names from emails.
+ * Example
+   
+   1. Download the CSV file from your (Team Lead Dashboard)[https://canary.remotasks.com/en/remoadmin/expert-management]
+   2. Copy the list of emails that are separated by whitespace from Slack to your clipboard.
+   3. Run `intersect.py` and put the results in your clipboard
+      ``` bash
+      pbpaste | python3 slack_names.py data/2024-01-18.csv | python3 write.py | pbcopy
+      ```
 
 ## Utilities
 * Read - (`read.py`) - Reads in a CSV file, extracts the emails, and outputs the data to a JSON array.
@@ -75,6 +85,12 @@ Use cases:
     ``` bash
     FORMATTED_DATA=`python3 write.py`
     echo ${FORMATTED_DATA} | pbcopy
+    # The text is now in your clipboard.
+    ```
+* Slack names - (`slack_names.py`) - Get a list of names based on your Team Lead Dashboard csv
+  * Example
+    ``` bash
+    pbpaste | python3 slack_names.py data/2024-01-18.csv | python3 write.py | pbcopy
     # The text is now in your clipboard.
     ```
 ## TODO Features
