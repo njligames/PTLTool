@@ -27,5 +27,5 @@ if None != filename:
         print(json.dumps(pod_emails))
     except:
         print('file error', file=sys.stderr)
-
-print(json.dumps(result))
+else:
+    print(json.dumps(result))
