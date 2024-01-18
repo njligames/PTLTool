@@ -77,3 +77,5 @@ Use cases:
     echo ${FORMATTED_DATA} | pbcopy
     # The text is now in your clipboard.
     ```
+## TODO Features
+[ ] - use ChatGPT to get an inspirational message for the `daily.py` script.
