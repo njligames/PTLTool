@@ -10,21 +10,25 @@ Use cases:
       ```
       JSON_DATA1=`python3 read.py path/to/file.1csv`
       ```
-   5. Run intersect.py and put the results in your clipboard
+   5. Run `intersect.py` and put the results in your clipboard
       ```
-      pbpaste | python3 union.py ${JSON_DATA} > pbcopy
+      pbpaste | python3 intersect.py ${JSON_DATA} > pbcopy
       ```
    
 * Between two or more lists of emails given to you on Slack, find which ones are in common.
  * Example
    ``` bash
-   # 1. Download the CSV file from your (Team Lead Dashboard)[https://canary.remotasks.com/en/remoadmin/expert-management]
-   # 2. Copy the list of emails that are separated by whitespace from Slack
+   1. Copy the list of emails that are separated by whitespace from Slack
+   ```
    JSON_DATA1=`pbpaste | python3 read.py`
-   # 3. Copy the list of emails that are separated by whitespace from Slack
+   ```
+   2. Copy the list of emails that are separated by whitespace from Slack
+   ```
    JSON_DATA2=`pbpaste | python3 read.py`
-   # 4. Run intersect.py and put the results in your clipboard
-   python3 union.py ${JSON_DATA} ${JSON_DATA2} > pbcopy
+   ```
+   3. Run intersect.py and put the results in your clipboard
+   ```
+   python3 intersect.py ${JSON_DATA} ${JSON_DATA2} > pbcopy
    ```
 
 ## Utilities
