@@ -76,8 +76,7 @@ Use cases:
   * Example
     ``` bash
     # The name of the file that was exported by the Team Lead Dashboard     
-    FORMATTED_DATA=`python3 daily.py path/to/file.csv`
-    echo ${FORMATTED_DATA} | pbcopy
+    python3 daily.py path/to/file.csv | pbcopy
     # The text is now in your clipboard.
     ```
 * Write - (`write.py`) - Outputs the JSON array to a format you can use on Slack.
