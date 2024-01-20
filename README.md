@@ -94,3 +94,4 @@ Use cases:
     ```
 ## TODO Features 
 [ ] - use ChatGPT to get an inspirational message for the `daily.py` script. 
+[ ] - put a star :star: before the name of people above 15 hours.
