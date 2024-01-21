@@ -94,9 +94,11 @@ for n in pod_names:
             else:
                 names_string += ":warning: "
 
-    names_string += "@" + n + " - " + str(hour) + " Hours\n"
-    if m == hour:
-        names_string += " :fire: :fire: :fire:"
+    names_string += "@" + n + " - " + str(hour) + " Hours"
+    if m == hour and 0.0 != hour:
+        names_string += " :fire: :fire: :fire:\n"
+    else:
+        names_string += "\n"
 
     i = i + 1
 
