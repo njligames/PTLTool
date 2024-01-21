@@ -54,12 +54,50 @@ We urge all team members to dedicate at least 15 hours per week, except for our 
 We have {} day left to hit our goals!!
 """.format(date.today(), days_left)
 
+def isNaN(num):
+    return num != num
+
+i = 0
+hours=[]
+for n in pod_names:
+    _hour = attemptHours[i]
+    try:
+        hour = float(_hour)
+    except:
+        hour = float("nan")
+    hours.append(hour)
+    i = i + 1
+
+m = max(hours)
+
 i = 0
 names_string = ""
 for n in pod_names:
-    if attemptHours[i] >= 15.0:
-        names_string += ":star: "
-    names_string += "@" + n + " - " + attemptHours[i] + " Hours\n"
+    _hour = attemptHours[i]
+    try:
+        hour = float(_hour)
+    except:
+        hour = float("nan")
+
+    satisfied_hours = 15.0
+
+    fraction = satisfied_hours / 6
+
+    if hour >= 15.0:
+        names_string += ":white_check_mark: "
+    else:
+        if hour == 0.0:
+            names_string += ":rotating_light: "
+        else:
+            if isNaN(hour):
+                names_string += ":construction: "
+            else:
+                names_string += ":warning: "
+
+    names_string += "@" + n + " - " + str(hour) + " Hours\n"
+    if m == hour:
+        names_string += " :fire: :fire: :fire:"
+
     i = i + 1
 
 info_string ="""
