@@ -57,6 +57,8 @@ We have {} day left to hit our goals!!
 i = 0
 names_string = ""
 for n in pod_names:
+    if attemptHours[i] >= 15.0:
+        names_string += ":star: "
     names_string += "@" + n + " - " + attemptHours[i] + " Hours\n"
     i = i + 1
 
