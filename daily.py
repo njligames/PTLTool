@@ -33,24 +33,27 @@ with open(filename) as csvfile:
 day_of_week = "{:%A}".format(date.today())
 days_left = 0
 if "Monday" == day_of_week:
-    days_left = 6
-if "Tuesday" == day_of_week:
     days_left = 5
-if "Wednesday" == day_of_week:
+if "Tuesday" == day_of_week:
     days_left = 4
-if "Thursday" == day_of_week:
+if "Wednesday" == day_of_week:
     days_left = 3
-if "Friday" == day_of_week:
+if "Thursday" == day_of_week:
     days_left = 2
-if "Saturday" == day_of_week:
+if "Friday" == day_of_week:
     days_left = 1
-if "Sunday" == day_of_week:
+if "Saturday" == day_of_week:
     days_left = 0
+if "Sunday" == day_of_week:
+    days_left = 6
 
 top_message = """
 :star2: Good day, Platinum Coders! :rocket: Let’s Dive into Tech Awesomeness! Today is {}
 Need a helping hand from our Platinum Technical Lead? :thinking_face: You’re in luck! Drop your questions in our daily help thread, and watch the magic happen! :sparkles:
 We urge all team members to dedicate at least 15 hours per week, except for our exceptional interviewers. I’m delighted to announce that each member in our POD has not just met but surpassed this target. What a fantastic way to start the day, with such remarkable enthusiasm and dedication! Keep up the outstanding effort!
+
+We’re all about that Platinum hustle, so we’re looking for folks who can kick butt and be present at least a bit each week. But hey, if life’s throwing curveballs your way and you need to dip out for personal reasons, hit up this form. Let the Platinum Ops Team know you’re still in the game but taking a timeout. We’re all in this together, superheroes! :muscle: #PlatinumLife #ResponsibilityCalls :male_superhero::female_superhero:
+
 We have {} day left to hit our goals!!
 """.format(date.today(), days_left)
 
