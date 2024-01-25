@@ -21,6 +21,7 @@ if None == filename:
 pod_emails = []
 pod_names = []
 attemptHours = []
+countAttempts = []
 with open(filename) as csvfile:
     reader = csv.DictReader(csvfile)
 
@@ -28,6 +29,7 @@ with open(filename) as csvfile:
         pod_emails.append(row["email"])
         pod_names.append(row["name"])
         attemptHours.append(row["attemptHours"])
+        countAttempts.append(row["countAttempts"])
 
 
 day_of_week = "{:%A}".format(date.today())
@@ -62,6 +64,7 @@ def isNaN(num):
 
 i = 0
 hours=[]
+attempts=[]
 for n in pod_names:
     _hour = attemptHours[i]
     try:
@@ -69,6 +72,13 @@ for n in pod_names:
     except:
         hour = float("nan")
     hours.append(hour)
+
+    _attempt = countAttempts[i]
+    try:
+        attempt = float(_attempt)
+    except:
+        attempt = float("nan")
+    attempts.append(attempt)
     i = i + 1
 
 m = max(hours)
@@ -81,6 +91,13 @@ for n in pod_names:
         hour = float(_hour)
     except:
         hour = float("nan")
+
+    _attempt = countAttempts[i]
+    try:
+        attempt = int(_attempt)
+    except:
+        attempt = int("nan")
+
 
     satisfied_hours = 15.0
 
@@ -97,7 +114,7 @@ for n in pod_names:
             else:
                 names_string += ":warning: "
 
-    names_string += "@" + n + " - " + str(hour) + " Hours"
+    names_string += "@" + n + " - " + str(hour) + " Hours with " + str(attempt) + " Attempts. "
     if m == hour and 0.0 != hour:
         names_string += " :fire: :fire: :fire:\n"
     else:
