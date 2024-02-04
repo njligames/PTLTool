@@ -57,7 +57,25 @@ We urge all team members to dedicate at least 15 hours per week, except for our 
 We’re all about that Platinum hustle, so we’re looking for folks who can kick butt and be present at least a bit each week. But hey, if life’s throwing curveballs your way and you need to dip out for personal reasons, hit up this form. Let the Platinum Ops Team know you’re still in the game but taking a timeout. We’re all in this together, superheroes! :muscle: #PlatinumLife #ResponsibilityCalls :male_superhero::female_superhero:
 
 We have {} day left to hit our goals!!
+
+When does the week start and end?
+Start: Monday, 12:00 AM PST
+End: Sunday, 11:59 PM PST
+
+* This is the timeframe each expert has to meet the 15 hour tasking minimum each week.
+* Each weeks Wednesday payout will reflect the total earned for tasks completed during this timeframe.
+
 """.format(date.today(), days_left)
+
+top_message += """
+*If you need to go away, it would be helpful if you can update your slack name to show the dates.
+EX: James Folk - OOO (01-01-2024 to 01-02-2024)
+
+**********************************************************************************
+These hours tend to be an overestimation. Please keep record of your own hours.
+**********************************************************************************
+
+"""
 
 def isNaN(num):
     return num != num
@@ -114,6 +132,7 @@ for n in pod_names:
             else:
                 names_string += ":warning: "
 
+    # names_string += "@" + n + " - " +  str(attempt) + " Attempts. "
     names_string += "@" + n + " - " + str(hour) + " Hours with " + str(attempt) + " Attempts. "
     if m == hour and 0.0 != hour:
         names_string += " :fire: :fire: :fire:\n"
@@ -141,7 +160,27 @@ Indicate the proper severity level:
 But wait, there’s more! Use the daily chat thread to mingle, share insights, or throw some virtual high-fives. :handshake::speech_balloon:
 :round_pushpin: Important links are right at the top for your swift navigation—because we’re all about efficiency! :zap:️
 Need help? I’m just a message away! Let’s crush those code challenges together! :rocket::computer:
+Tips...
+If you are getting an error with a task, please message the admin of the project page for that task. It is important that you refer to the task number.
 Cheers to coding victories! :tada::sparkles:
+
+I would like to start a new habit.
+If by the end of the week you feel that you cannot make your 15 hours, please private message me.
+Choose one of the Reasons:
+* Personal impediment
+* EQ issues
+* Technical Issues
+* New platinum
+* Other
+
+Format it like this:
+```
+Reason: (Personal impediment or EQ issues or Technical Issues or New platinum or Other)
+Detail: (in under 20 words)
+```
+
+When you do this, it allows me to  better help you when you are audited by Remotasks.
+
 @James Folk - PTL
  :green_heart:
 """
