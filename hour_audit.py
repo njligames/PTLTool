@@ -5,16 +5,9 @@ import sys
 import csv
 import json
 
-pod_filename=None
-if(len(sys.argv) > 1):
-    pod_filename=sys.argv[1]
-
 audit_filename=None
-if(len(sys.argv) > 2):
-    audit_filename=sys.argv[2]
-
-pod_emails = []
-pod_slack = []
+if(len(sys.argv) > 1):
+    audit_filename=sys.argv[1]
 
 audit_emails = []
 audit_thisweek = []
@@ -25,15 +18,6 @@ audit_4week = []
 audit_color = []
 
 try:
-    # pod_filename="data/2024-02-05.csv"
-    # with open(pod_filename) as csvfile:
-    #     reader = csv.DictReader(csvfile)
-
-    #     for row in reader:
-    #         pod_emails.append(row["email"])
-    #         pod_slack.append(row["name"])
-
-    # audit_filename="data/Plat Reward - AB Test - Division.csv"
     with open(audit_filename) as csvfile:
         reader = csv.DictReader(csvfile)
 
@@ -51,8 +35,6 @@ except Exception as e:
     print(e, file=sys.stderr)
 
 for i in range(len(audit_emails)):
-    # for i in range(len(pod_slack)):
-    # if email == pod_emails[i]:
     print("*****************************************")
     message = "Hello, Remotasks wanted me to let you know that you are in danger with not making your hours.\n"
     message += "Warning level from least to most: Green (safe), Yellow, Red, and Red Demotion (cannot help), you are " + audit_color[i] + "\n"
