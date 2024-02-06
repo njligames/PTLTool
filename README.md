@@ -92,6 +92,11 @@ Use cases:
     pbpaste | python3 slack_names.py data/2024-01-18.csv | python3 write.py | pbcopy
     # The text is now in your clipboard.
     ```
+* Hour audit - (`hour_audit.py`) - parse the demotion sheet to create a list of people that need to be warned.
+* Example
+    ``` bash
+    python3 hour_audit.py  data/2024-02-06.csv data/PTLs\ __\ Platinum\ Coders\ Experts\ SSOT\ -\ Hours\ Week\ 1_29.csv > temp.txt
+    ```
 ## TODO Features 
 [ ] - use ChatGPT to get an inspirational message for the `daily.py` script. 
 [X] - put a star :star: before the name of people above 15 hours.
