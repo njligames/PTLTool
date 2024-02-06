@@ -54,7 +54,7 @@ for i in range(len(audit_emails)):
     # for i in range(len(pod_slack)):
     # if email == pod_emails[i]:
     print("*****************************************")
-    message = "Hello, remotasks wanted me to let you know that you are in danger with not making your hours.\n"
+    message = "Hello, Remotasks wanted me to let you know that you are in danger with not making your hours.\n"
     message += "Warning level from least to most: Green (safe), Yellow, Red, and Red Demotion (cannot help), you are " + audit_color[i] + "\n"
     message += audit_emails[i] + "\n"
     message += "Hours:\n"
@@ -66,7 +66,7 @@ for i in range(len(audit_emails)):
     message += "You will be kept as a platinum tasker if you meet these three principles...\n"
     message += "\t1. Time - Minimum 15 hours\n"
     message += "\t2. Quality - 4/5 or 5/5 stars\n"
-    message += "\t3. Communication - Communicate your project level issues with the project manager. Escalate your issues thorugh the escalation form (https://airtable.com/appE7bIarMItNVnpW/shrbz0F1YhqhfCRjx). Communicate with me if you have an empty queue.\n"
+    message += "\t3. Communication - Communicate your project level issues with the project manager. Escalate your issues through the escalation form (https://airtable.com/appE7bIarMItNVnpW/shrbz0F1YhqhfCRjx). Communicate with me if you have an empty queue.\n"
 
     print(message)
 
