@@ -93,10 +93,13 @@ Use cases:
     # The text is now in your clipboard.
     ```
 * Hour audit - (`hour_audit.py`) - parse the demotion sheet to create a list of people that need to be warned.
-* Example
-    ``` bash
-    python3 hour_audit.py  data/2024-02-06.csv data/PTLs\ __\ Platinum\ Coders\ Experts\ SSOT\ -\ Hours\ Week\ 1_29.csv > temp.txt
-    ```
+   * Example
+      * Convert the sheet for the date you want to `.csv`. Spreadsheet: https://docs.google.com/spreadsheets/d/1-ZD4P3KWVaVmZhA7MkmRmXjZaRtZ74OTfxJbC1tezD0/edit#gid=1383793266
+      * Run the script...
+          ``` bash
+          python3 hour_audit.py  data/2024-02-06.csv data/PTLs\ __\ Platinum\ Coders\ Experts\ SSOT\ -\ Hours\ Week\ 1_29.csv > temp.txt
+          ```
+      * The script will create a list, that you can use to copy and paste to them through DM. Use their email in remotasks tool to get their worker slack. 
 ## TODO Features 
 [ ] - use ChatGPT to get an inspirational message for the `daily.py` script. 
 [X] - put a star :star: before the name of people above 15 hours.
