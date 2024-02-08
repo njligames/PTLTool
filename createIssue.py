@@ -3,6 +3,7 @@
 prompt = []
 
 prompt.append("Expert(s) Email or Worker ID(s)")
+prompt.append("Sev (0-2)")
 prompt.append("Worker Team")
 prompt.append("Issue Type: [EQ, Pay/Bonu, Technical Error, etc.]")
 prompt.append("Issue Explanation")

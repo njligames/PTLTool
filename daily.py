@@ -9,7 +9,6 @@ def intersection(lst1, lst2):
     lst3 = [value for value in lst1 if value in lst2]
     return lst3
 
-# The name of the file that was exported by the Team Lead Dashboard
 filename=None
 if(len(sys.argv) > 1):
     filename=sys.argv[1]
@@ -18,19 +17,15 @@ if None == filename:
     print('file error', file=sys.stderr)
     exit(1)
 
-pod_emails = []
-pod_names = []
-attemptHours = []
-countAttempts = []
+name_dict = {}
 with open(filename) as csvfile:
     reader = csv.DictReader(csvfile)
 
+    i = 0
     for row in reader:
-        pod_emails.append(row["email"])
-        pod_names.append(row["name"])
-        attemptHours.append(row["attemptHours"])
-        countAttempts.append(row["countAttempts"])
+        name_dict[row["name"]] = {"hours":row["attemptHours"], "attempts":row["countAttempts"]}
 
+name_dict_sorted = dict(sorted(name_dict.items()))
 
 day_of_week = "{:%A}".format(date.today())
 days_left = 0
@@ -80,46 +75,13 @@ These hours tend to be an overestimation. Please keep record of your own hours.
 def isNaN(num):
     return num != num
 
-i = 0
-hours=[]
-attempts=[]
-for n in pod_names:
-    _hour = attemptHours[i]
-    try:
-        hour = float(_hour)
-    except:
-        hour = float("nan")
-    hours.append(hour)
-
-    _attempt = countAttempts[i]
-    try:
-        attempt = float(_attempt)
-    except:
-        attempt = float("nan")
-    attempts.append(attempt)
-    i = i + 1
-
 m = max(hours)
 
-i = 0
 names_string = ""
-for n in pod_names:
-    _hour = attemptHours[i]
-    try:
-        hour = float(_hour)
-    except:
-        hour = float("nan")
-
-    _attempt = countAttempts[i]
-    try:
-        attempt = int(_attempt)
-    except:
-        attempt = int("nan")
-
-
-    satisfied_hours = 15.0
-
-    fraction = satisfied_hours / 6
+for k, v in name_dict_sorted.items():
+    name = k
+    hour = float(v["hours"])
+    attempt = int(v["attempts"])
 
     if hour >= 15.0:
         names_string += ":white_check_mark: "
@@ -132,14 +94,11 @@ for n in pod_names:
             else:
                 names_string += ":warning: "
 
-    # names_string += "@" + n + " - " +  str(attempt) + " Attempts. "
-    names_string += "@" + n + " - " + str(hour) + " Hours with " + str(attempt) + " Attempts. "
+    names_string += "@" + name + " - " + str(hour) + " Hours with " + str(attempt) + " Attempts. "
     if m == hour and 0.0 != hour:
         names_string += " :fire: :fire: :fire:\n"
     else:
         names_string += "\n"
-
-    i = i + 1
 
 info_string ="""
 Information you need to include to expedite assistance:
