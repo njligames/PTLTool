@@ -17,13 +17,25 @@ if None == filename:
     print('file error', file=sys.stderr)
     exit(1)
 
+def isNaN(num):
+    return num != num
+
+max_hours = 0
 name_dict = {}
 with open(filename) as csvfile:
     reader = csv.DictReader(csvfile)
 
     i = 0
     for row in reader:
-        name_dict[row["name"]] = {"hours":row["attemptHours"], "attempts":row["countAttempts"]}
+        _hours = row["attemptHours"]
+        if isNaN(_hours):
+            hours = 0
+        else:
+            hours = float(_hours)
+
+        name_dict[row["name"]] = {"hours":hours, "attempts":row["countAttempts"]}
+        if hours > max_hours:
+            max_hours = hours
 
 name_dict_sorted = dict(sorted(name_dict.items()))
 
@@ -44,38 +56,85 @@ if "Saturday" == day_of_week:
 if "Sunday" == day_of_week:
     days_left = 6
 
+manager_string = "The project manager contacts are as follows:\n"
+with open("data/PTL Platinum Project Directory - Coding.csv") as csvfile:
+    reader = csv.DictReader(csvfile)
+
+    indent = "\t\t"
+    for row in reader:
+        manager_string += indent + row["Project Name"] + " - " + row["Point of Contact"] + "\n"
+
 top_message = """
-:star2: Good day, Platinum Coders! :rocket: Let’s Dive into Tech Awesomeness! Today is {}
-Need a helping hand from our Platinum Technical Lead? :thinking_face: You’re in luck! Drop your questions in our daily help thread, and watch the magic happen! :sparkles:
-We urge all team members to dedicate at least 15 hours per week, except for our exceptional interviewers. I’m delighted to announce that each member in our POD has not just met but surpassed this target. What a fantastic way to start the day, with such remarkable enthusiasm and dedication! Keep up the outstanding effort!
-
-We’re all about that Platinum hustle, so we’re looking for folks who can kick butt and be present at least a bit each week. But hey, if life’s throwing curveballs your way and you need to dip out for personal reasons, hit up this form. Let the Platinum Ops Team know you’re still in the game but taking a timeout. We’re all in this together, superheroes! :muscle: #PlatinumLife #ResponsibilityCalls :male_superhero::female_superhero:
-
+:star2: Good day, Platinum Coders! :rocket:
+Today is {}
 We have {} day left to hit our goals!!
-
-When does the week start and end?
-Start: Monday, 12:00 AM PST
-End: Sunday, 11:59 PM PST
-
-* This is the timeframe each expert has to meet the 15 hour tasking minimum each week.
-* Each weeks Wednesday payout will reflect the total earned for tasks completed during this timeframe.
 
 """.format(date.today(), days_left)
 
 top_message += """
-*If you need to go away, it would be helpful if you can update your slack name to show the dates.
-EX: James Folk - OOO (01-01-2024 to 01-02-2024)
+* Question Thread:
+   - Please post any questions in this designated thread.
 
-**********************************************************************************
-These hours tend to be an overestimation. Please keep record of your own hours.
-**********************************************************************************
+* Weekly Hourly Goal:
+   - Aim for 15 hours per week.
+   - Time bracket: Monday 12:00 AM PST to Sunday 11:59 PM PST.
 
-"""
+* Calculation Details:
+   - Daily post hours: Sunday to Monday.
+   - Pay hours: Wednesday to Tuesday.
+   - 15 hour requirement: Monday to Sunday
 
-def isNaN(num):
-    return num != num
+* Incentives and Absences:
+   - Look out for spot monetary incentives.
+   - If away, fill out the form with your Slack name marked as OOO (Out of Office).
+   - [Out of Office Form](https://docs.google.com/forms/d/e/1FAIpQLSeZRLgRiliTMSLX4UGeZ79j0J7ms9P7A6M14VeBGd0_QjYgoQ/viewform)
+   - Slack name example: James Folk - OOO (01-01-2024 to 01-02-2024)
 
-m = max(hours)
+* Task Approach:
+   - Be proactive in task completion.
+   - Join project channels and identify project managers.
+   - Always be in the trial and coders channels; if not, message for assistance.
+      - (#platinum-coders-trial or platinum-coders-trial)
+      - (#platinum-coders-team or platinum-coders-team)
+   - Save task IDs for reference in case of issues.
+   - Take screenshots in case of task-related problems.
+
+* Issue Resolution:
+   - For pay, EQ, tasks, or project issues:
+      1. Gather information.
+      2. Check with peers for similar experiences.
+      3. Create a help ticket: [Support Ticket](https://support.remotasks.com/hc/en-us/requests/new)
+      4. Report issues through the escalation form: [Escalation Form](https://airtable.com/appE7bIarMItNVnpW/shrbz0F1YhqhfCRjx)
+      5. Indicate severity level:
+         - Sev-2 Issue: New issue <2 hours.
+         - Sev-1 Issue: Issue persisted for 2-5 hours.
+         - Sev-0 Issue: Issue persisted for 5+ hours.
+      6. For project/task issues, message the project manager in the project channel and tag me.
+         {}
+      7. For Sev-0 issues, direct message me with the Request Number.
+      8. Escalation issues are monitored through AirTable.
+
+* Requests:
+   - If by the end of the week you feel that you cannot make your 15 hours, please private message me.
+      1. Choose one of the Reasons:
+         - Personal impediment
+         - EQ issues
+         - Technical Issues
+         - New platinum
+         - Other
+      2. Format the message like this:
+         ```
+         Reason: (Personal impediment or EQ issues or Technical Issues or New platinum or Other)
+         Detail: (in under 20 words)
+         ```
+      3. When you do this, it allows me to  better help you when you are audited by Remotasks.
+   - When you message me for help, please format it as follows:
+        ```
+        Remotask ID:
+        Description: (in under 20 words)
+        Help/Escalation Ticket Number:
+        ```
+""".format(manager_string)
 
 names_string = ""
 for k, v in name_dict_sorted.items():
@@ -95,55 +154,50 @@ for k, v in name_dict_sorted.items():
                 names_string += ":warning: "
 
     names_string += "@" + name + " - " + str(hour) + " Hours with " + str(attempt) + " Attempts. "
-    if m == hour and 0.0 != hour:
+    if max_hours == hour and 0.0 != hour:
         names_string += " :fire: :fire: :fire:\n"
     else:
         names_string += "\n"
 
-info_string ="""
-Information you need to include to expedite assistance:
-* Remotask ID
-* Task ID if applicable
-* Email address
-* Detailed description of problem/question/concern
-* Screenshot/Screen-recording demonstrating the issue
-:point_right: If our Platinum Technical Lead is on a coffee break, fret not! Post in the Platinum Coders channel
-#platinum-coders-team (post-trial) or Platinum Coders Trial channel
-#platinum-coders-trial (still on trial), and our brilliant community will swoop in to save the day! :male_superhero::female_superhero:
-:female-technologist: Tell us your preferred project language with :star2: (https://forms.gle/cfYY4hCCDjWexCFo9) :star2:
-:screwdriver: For issues with pay, tasks, projects, and EQ, fill out this :arrow_forward: (https://airtable.com/appE7bIarMItNVnpW/shrbz0F1YhqhfCRjx) :arrow_backward:. Here are the instructions. (https://airtable.com/appE7bIarMItNVnpW/shrbz0F1YhqhfCRjx)
-Indicate the proper severity level:
-\ta. Sev-2 Issue: The issue is new <2 hours
-\tb. Sev-1 Issue: The issue has persisted for 2-5 hours
-\tc. Sev-0 Issue: The issue has persisted for 5+ hours
-But wait, there’s more! Use the daily chat thread to mingle, share insights, or throw some virtual high-fives. :handshake::speech_balloon:
-:round_pushpin: Important links are right at the top for your swift navigation—because we’re all about efficiency! :zap:️
-Need help? I’m just a message away! Let’s crush those code challenges together! :rocket::computer:
-Tips...
-If you are getting an error with a task, please message the admin of the project page for that task. It is important that you refer to the task number.
-Cheers to coding victories! :tada::sparkles:
+bottom_message = """
 
-I would like to start a new habit.
-If by the end of the week you feel that you cannot make your 15 hours, please private message me.
-Choose one of the Reasons:
-* Personal impediment
-* EQ issues
-* Technical Issues
-* New platinum
-* Other
+As a Platinum Coder, we follow these three principles:
+	1. Time - Minimum 15 hours
+	2. Quality - 4/5 or 5/5 stars
+	3. Communication - Please keep in contact with me.
 
-Format it like this:
-```
-Reason: (Personal impediment or EQ issues or Technical Issues or New platinum or Other)
-Detail: (in under 20 words)
-```
+When you are in my Platinum POD, it is important to me that we act proactivly so that we are ready when issues may arise.
 
-When you do this, it allows me to  better help you when you are audited by Remotasks.
+When I joined the Platinum Team, I was presented with these four commitments.
 
-@James Folk - PTL
- :green_heart:
+The Four Commitments of a Winning Team
+    1. Know your job
+    2. Do what you’re asked
+    3. Make people look good
+    4. Look out for others
+
+I think these four commitments will guide us to build a strong team!
+
+ @James Folk - PTL
+  :green_heart:
+
 """
 
-message = top_message + names_string + info_string
+message = top_message + names_string + bottom_message
 
 print(message)
+
+names_string = "This message is to make sure that my POD taskers are in the platinum channels.\n"
+i = 0
+for k, v in name_dict_sorted.items():
+    name = k
+    names_string += "@" + name
+    names_string += "\n"
+    i += 1
+    if i > 3:
+        i = 0
+        # print(names_string)
+        names_string = "This message is to make sure that my POD taskers are in the platinum channels.\n"
+
+
+# print(names_string)

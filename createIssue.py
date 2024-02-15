@@ -10,7 +10,7 @@ prompt.append("Issue Explanation")
 prompt.append("Screenshots / Attachments")
 
 ans = []
-for i in [0, 1, 2, 3, 4]:
+for i in [0, 1, 2, 3, 4, 5]:
     ans.append(input(prompt[i] + ": "))
 
 print("****************************\n\n")
