@@ -40,21 +40,21 @@ with open(filename) as csvfile:
 name_dict_sorted = dict(sorted(name_dict.items()))
 
 day_of_week = "{:%A}".format(date.today())
-days_left = 0
+days_left = "zero days left"
 if "Monday" == day_of_week:
-    days_left = 5
+    days_left = "six days left"
 if "Tuesday" == day_of_week:
-    days_left = 4
+    days_left = "five days left"
 if "Wednesday" == day_of_week:
-    days_left = 3
+    days_left = "four days left"
 if "Thursday" == day_of_week:
-    days_left = 2
+    days_left = "three days left"
 if "Friday" == day_of_week:
-    days_left = 1
+    days_left = "two days left"
 if "Saturday" == day_of_week:
-    days_left = 0
+    days_left = "one day left"
 if "Sunday" == day_of_week:
-    days_left = 6
+    days_left = "zero days left"
 
 manager_string = "The project manager contacts are as follows:\n"
 with open("data/PTL Platinum Project Directory - Coding.csv") as csvfile:
@@ -66,10 +66,10 @@ with open("data/PTL Platinum Project Directory - Coding.csv") as csvfile:
 
 top_message = """
 :star2: Good day, Platinum Coders! :rocket:
-Today is {}
-We have {} day left to hit our goals!!
+Today is {}, {}
+We have {} to hit our goals!!
 
-""".format(date.today(), days_left)
+""".format(day_of_week, date.today(), days_left)
 
 top_message += """
 * Question Thread:
