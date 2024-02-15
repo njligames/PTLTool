@@ -153,7 +153,7 @@ for k, v in name_dict_sorted.items():
             else:
                 names_string += ":warning: "
 
-    names_string += "@" + name + " - " + str(hour) + " Hours with " + str(attempt) + " Attempts. "
+    names_string += "@" + name + " - " + str(round(hour, 2)) + " Hours with " + str(attempt) + " Attempts. "
     if max_hours == hour and 0.0 != hour:
         names_string += " :fire: :fire: :fire:\n"
     else:
