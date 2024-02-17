@@ -1,9 +1,14 @@
 
 #!/usr/local/bin/python3
 
+import os
 import sys
 import csv
+import datetime
+import json
 from datetime import date
+from datetime import datetime
+from datetime import timedelta
 
 def intersection(lst1, lst2):
     lst3 = [value for value in lst1 if value in lst2]
@@ -80,9 +85,8 @@ top_message += """
    - Time bracket: Monday 12:00 AM PST to Sunday 11:59 PM PST.
 
 * Calculation Details:
-   - Daily post hours: Sunday to Monday.
-   - Pay hours: Wednesday to Tuesday.
-   - 15 hour requirement: Monday to Sunday
+    - Platinum 15 hour window: 12AM PST Monday - 11:59PM PST Sunday
+    - Pay Period window: 4PM PST Monday - 3:59PM PST Monday
 
 * Incentives and Absences:
    - Look out for spot monetary incentives.
@@ -99,20 +103,38 @@ top_message += """
    - Save task IDs for reference in case of issues.
    - Take screenshots in case of task-related problems.
 
+* Questions
+    - Please search for the answers.
+        - In the Platinum Coders Channel (#platinum-coders-team)
+        - In the Platinum Trial Channel (#platinum-coders-trial)
+        - In the Project Specifc Channels
+        - In our POD channel (#cplatr_james_pod )
+    - Please look at the Bookmarked and Pinned pages in the channels.
+    - Public type questions - Questions that other people would be benefit from
+        - Project specific questions
+        - Task specific questions
+    - Private type questions - Questions that could be considered private information
+        - Can't make hours
+        - Will be away
+        - Pay questions
+        - ect...
 * Issue Resolution:
    - For pay, EQ, tasks, or project issues:
       1. Gather information.
       2. Check with peers for similar experiences.
-      3. Create a help ticket: [Support Ticket](https://support.remotasks.com/hc/en-us/requests/new)
-      4. Report issues through the escalation form: [Escalation Form](https://airtable.com/appE7bIarMItNVnpW/shrbz0F1YhqhfCRjx)
-      5. Indicate severity level:
-         - Sev-2 Issue: New issue <2 hours.
-         - Sev-1 Issue: Issue persisted for 2-5 hours.
-         - Sev-0 Issue: Issue persisted for 5+ hours.
-      6. For project/task issues, message the project manager in the project channel and tag me.
-         {}
-      7. For Sev-0 issues, direct message me with the Request Number.
-      8. Escalation issues are monitored through AirTable.
+      3. If it is project/task specific question, there are at least four channels you can ask the question from your peers.
+        - Our public channel (#cplatr_james_pod )
+        - Platinum coders channel (#platinum-coders-team)
+        - Platinum trial channel (#platinum-coders-trial)
+        - Project channel(s)
+      4. After 2 hours, report issues through the escalation form: [Escalation Form](https://airtable.com/appE7bIarMItNVnpW/shrbz0F1YhqhfCRjx)
+          - Indicate severity level:
+             - Sev-2 Issue: Issue persisted for 2-5 hours.
+             - Sev-1 Issue: Issue persisted for 5-8 hours.
+             - Sev-0 Issue: Issue persisted for 8+ hours.
+      5. For project/task issues, message the project manager in the project channel and tag me.
+      6. For Sev-0 issues, direct message me with the Request Number.
+      7. Escalation issues are monitored through AirTable.
 
 * Requests:
    - If by the end of the week you feel that you cannot make your 15 hours, please private message me.
@@ -131,10 +153,11 @@ top_message += """
    - When you message me for help, please format it as follows:
         ```
         Remotask ID:
+        Project Name:
         Description: (in under 20 words)
         Help/Escalation Ticket Number:
         ```
-""".format(manager_string)
+"""
 
 names_string = ""
 for k, v in name_dict_sorted.items():
@@ -187,10 +210,12 @@ message = top_message + names_string + bottom_message
 
 print(message)
 
+current_names = []
 names_string = "This message is to make sure that my POD taskers are in the platinum channels.\n"
 i = 0
 for k, v in name_dict_sorted.items():
     name = k
+    current_names.append(name)
     names_string += "@" + name
     names_string += "\n"
     i += 1
@@ -198,6 +223,49 @@ for k, v in name_dict_sorted.items():
         i = 0
         # print(names_string)
         names_string = "This message is to make sure that my POD taskers are in the platinum channels.\n"
-
-
 # print(names_string)
+
+
+previous_names = []
+now = datetime.now()
+d = date(now.year, now.month, now.day)
+d = d - timedelta(days=1)
+try:
+    filename="data/" + str(d) + ".csv"
+    with open(filename) as csvfile:
+        reader = csv.DictReader(csvfile)
+
+        for row in reader:
+            previous_names.append(row["name"])
+except Exception as e:
+    pass
+
+modified = []
+
+current_names.sort()
+previous_names.sort()
+
+
+# current_names.pop(0)
+# current_names.insert(0,"HI")
+
+for n in current_names:
+    if n not in previous_names:
+        modified.append(n)
+
+
+# Use this command to add Diffmerge to the path
+# export PATH=$PATH:/Applications/DiffMerge.app/Contents/MacOS/
+if len(modified) > 0:
+
+    f = open("current.json", "w")
+    f.write(json.dumps(current_names, sort_keys=True, indent=4))
+    f.close()
+
+    f = open("previous.json", "w")
+    f.write(json.dumps(previous_names, sort_keys=True, indent=4))
+    f.close()
+
+    os.system("diffmerge previous.json current.json")
+    os.system("rm previous.json")
+    os.system("rm current.json")
