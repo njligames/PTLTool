@@ -103,11 +103,22 @@ top_message += """
    - Save task IDs for reference in case of issues.
    - Take screenshots in case of task-related problems.
 
-* Questions
+* Questions (TLDR; ask in the project channels FIRST)
     - Please search for the answers.
         - In the Platinum Coders Channel (#platinum-coders-team)
         - In the Platinum Trial Channel (#platinum-coders-trial)
         - In the Project Specifc Channels
+            - Flamingo
+                - #platinum_flamingo_coder_onboarding or platinum_flamingo_coder_onboarding
+                - #flamingo_coding_general or flamingo_coding_general
+                - #flamingo_coding_platinum_general or flamingo_coding_platinum_general
+            - Vertigo
+                - #vertigo_coding_bigquery  or vertigo_coding_bigquery
+                - #vertigo_coding_bq_translation or vertigo_coding_bq_translation
+                - #vertigo_coding_cif_evals or vertigo_coding_cif_evals
+                - #vertigo_coding_cif_prompt or vertigo_coding_cif_prompt
+                - #vertigo_coding_text_to_sql or vertigo_coding_text_to_sql
+                - #vertigo-code-eval-prompt or vertigo-code-eval-prompt
         - In our POD channel (#cplatr_james_pod )
     - Please look at the Bookmarked and Pinned pages in the channels.
     - Public type questions - Questions that other people would be benefit from
@@ -118,6 +129,13 @@ top_message += """
         - Will be away
         - Pay questions
         - ect...
+           - When you message me for help, please format it as follows:
+                ```
+                Remotask ID:
+                Project Name:
+                Description: (in under 20 words)
+                Help/Escalation Ticket Number:
+                ```
 * Issue Resolution:
    - For pay, EQ, tasks, or project issues:
       1. Gather information.
@@ -150,13 +168,6 @@ top_message += """
          Detail: (in under 20 words)
          ```
       3. When you do this, it allows me to  better help you when you are audited by Remotasks.
-   - When you message me for help, please format it as follows:
-        ```
-        Remotask ID:
-        Project Name:
-        Description: (in under 20 words)
-        Help/Escalation Ticket Number:
-        ```
 """
 
 names_string = ""
@@ -211,7 +222,7 @@ message = top_message + names_string + bottom_message
 print(message)
 
 current_names = []
-names_string = "This message is to make sure that my POD taskers are in the platinum channels.\n"
+names_string = "This message is to make sure that my POD taskers are in the proper channels.\n"
 i = 0
 for k, v in name_dict_sorted.items():
     name = k
@@ -222,7 +233,7 @@ for k, v in name_dict_sorted.items():
     if i > 3:
         i = 0
         # print(names_string)
-        names_string = "This message is to make sure that my POD taskers are in the platinum channels.\n"
+        names_string = "This message is to make sure that my POD taskers are in the proper channels.\n"
 # print(names_string)
 
 
