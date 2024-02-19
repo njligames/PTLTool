@@ -34,10 +34,26 @@ try:
 except Exception as e:
     print(e, file=sys.stderr)
 
+def textUpdate(color):
+    message = ""
+    if "green" == color:
+        message = "You are completing your hours! :thumbsup:"
+    elif "yellow" == color:
+        message = "Remotasks wants me to contact you to improve your hours."
+    elif "red" == color:
+        message = "You are not meeting the expected hourly commitment. I will need you to message me why, so we can discuss."
+    elif "red-demotion" == color:
+        message = "I am unable to make an appeal for you. You will be demoted because of low hours."
+    elif "magenta" == color:
+        message = ""
+    return message
+
+
+
 for i in range(len(audit_emails)):
     print("*****************************************")
-    message = "Hello, Remotasks wanted me to let you know that if you are not in Green, then you are in  danger of not making your hours.\n"
-    message += "Warning level from least to most: Green (safe), Yellow, Red, and Red Demotion (cannot help), you are " + audit_color[i] + "\n"
+    message = "Hello! I have been given the weekly update for your hours." + "\n"
+    message += textUpdate(audit_color[i].lower()) + "\n"
     message += audit_emails[i] + "\n"
     message += "Hours:\n"
     message += "\tThis week: " + audit_thisweek[i] + "\n"
@@ -48,7 +64,13 @@ for i in range(len(audit_emails)):
     message += "You will be kept as a platinum tasker if you meet these three principles...\n"
     message += "\t1. Time - Minimum 15 hours\n"
     message += "\t2. Quality - 4/5 or 5/5 stars\n"
-    message += "\t3. Communication - Communicate your project level issues with the project manager. For task o rproject related issues, please file a help ticket (https://support.remotasks.com/hc/en-us/requests/new). Escalate your issues through the escalation form (https://airtable.com/appE7bIarMItNVnpW/shrbz0F1YhqhfCRjx). Communicate with me if you have an empty queue.\n"
+    message += "\t3. Communication - Please refer to the daily thread in our POD.\n"
 
     print(message)
 
+# :medium-risk:How we can read the weekly hours report?:medium-risk:
+# Green: The Platinum Experts are completing the hours! :thumbs:
+# Yellow: We recommend to contact the Experts so they can improve their hours.
+# Red: Please inform the Experts that they are not meeting the expected hourly commitment and provide specific comments about their overall performance.
+# You can always appeal for someone, in that case they will appear as Red-Appeal (in case the appeal was accepted)
+# Red-Demotion: There isn’t a possibility to appeal and demotion is imperative (0 hours in 5 weeks).

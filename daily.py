@@ -119,9 +119,7 @@ top_message += """
                 - #vertigo_coding_bq_translation or vertigo_coding_bq_translation
                 - #vertigo_coding_cif_evals or vertigo_coding_cif_evals
                 - #vertigo_coding_cif_evals_reviewers or vertigo_coding_cif_evals_reviewers
-                - #vertigo_coding_cif_prompt or vertigo_coding_cif_prompt
                 - #vertigo_coding_text_to_sql or vertigo_coding_text_to_sql
-                - #vertigo-code-eval-prompt or vertigo-code-eval-prompt
             - Bulba
                 - #bulba_multiturn_general or bulba_multiturn_general
                 - #bulba-code-eval-rating-chat-tasks or bulba-code-eval-rating-chat-tasks
@@ -145,9 +143,18 @@ top_message += """
                 Remotask ID:
                 Project Name:
                 Description: (in under 20 words)
-                Help/Escalation Ticket Number:
+                Ticket Number:
                 ```
+
 * Issue Resolution:
+    ************************************
+    ************************************
+    ************************************
+    Escalation Form is no longer available
+    ************************************
+    ************************************
+    ************************************
+
    - For pay, EQ, tasks, or project issues:
       1. Gather information.
       2. Check with peers for similar experiences.
@@ -155,15 +162,11 @@ top_message += """
         - Our public channel (#cplatr_james_pod )
         - Platinum coders channel (#platinum-coders-team)
         - Platinum trial channel (#platinum-coders-trial)
-        - Project channel(s)
-      4. After 2 hours, report issues through the escalation form: [Escalation Form](https://airtable.com/appE7bIarMItNVnpW/shrbz0F1YhqhfCRjx)
-          - Indicate severity level:
-             - Sev-2 Issue: Issue persisted for 2-5 hours.
-             - Sev-1 Issue: Issue persisted for 5-8 hours.
-             - Sev-0 Issue: Issue persisted for 8+ hours.
-      5. For project/task issues, message the project manager in the project channel and tag me.
-      6. For Sev-0 issues, direct message me with the Request Number.
-      7. Escalation issues are monitored through AirTable.
+        - Project channel(s) - Please tag me.
+      4. If you issue goes unresolved, please submit a Support Ticket (Zendesk)
+        - How to:
+            - Remotasks: https://www.loom.com/share/f835796648044ed784df8bc939050cd1?sid=958d172e-1ea6-4a55-942c-435c7e893f90
+            - Outlier: https://www.loom.com/share/c298cffa4f8740409de93f8ddcee1b14
 
 * Requests:
    - If by the end of the week you feel that you cannot make your 15 hours, please private message me.
@@ -178,7 +181,7 @@ top_message += """
          Reason: (Personal impediment or EQ issues or Technical Issues or New platinum or Other)
          Detail: (in under 20 words)
          ```
-      3. When you do this, it allows me to  better help you when you are audited by Remotasks.
+      3. When you do this, it allows me to better help you when you are audited by Remotasks.
 
 """
 
