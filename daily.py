@@ -87,6 +87,7 @@ top_message += """
 * Calculation Details:
     - Platinum 15 hour window: 12AM PST Monday - 11:59PM PST Sunday
     - Pay Period window: 4PM PST Monday - 3:59PM PST Monday
+    - Daily Post window: Yestarday's hours (new)
 
 * Incentives and Absences:
    - Look out for spot monetary incentives.
@@ -114,11 +115,21 @@ top_message += """
                 - #flamingo_coding_platinum_general or flamingo_coding_platinum_general
             - Vertigo
                 - #vertigo_coding_bigquery  or vertigo_coding_bigquery
+                - #vertigo_coding_bigquery_reviewers  or vertigo_coding_bigquery_reviewers
                 - #vertigo_coding_bq_translation or vertigo_coding_bq_translation
                 - #vertigo_coding_cif_evals or vertigo_coding_cif_evals
+                - #vertigo_coding_cif_evals_reviewers or vertigo_coding_cif_evals_reviewers
                 - #vertigo_coding_cif_prompt or vertigo_coding_cif_prompt
                 - #vertigo_coding_text_to_sql or vertigo_coding_text_to_sql
                 - #vertigo-code-eval-prompt or vertigo-code-eval-prompt
+            - Bulba
+                - #bulba_multiturn_general or bulba_multiturn_general
+                - #bulba-code-eval-rating-chat-tasks or bulba-code-eval-rating-chat-tasks
+                - #bulba_code_eval_chat_tasks_t_3 or bulba_code_eval_chat_tasks_t_3
+                - #bulba_code_gen_e2e-sft_platinum or bulba_code_gen_e2e-sft_platinum
+            - Bee
+                - #bee_coding_group_announcements or bee_coding_group_announcements
+
         - In our POD channel (#cplatr_james_pod )
     - Please look at the Bookmarked and Pinned pages in the channels.
     - Public type questions - Questions that other people would be benefit from
@@ -168,9 +179,10 @@ top_message += """
          Detail: (in under 20 words)
          ```
       3. When you do this, it allows me to  better help you when you are audited by Remotasks.
+
 """
 
-names_string = ""
+names_string = "These are the hours for yesterday...\n\n"
 for k, v in name_dict_sorted.items():
     name = k
     hour = float(v["hours"])
