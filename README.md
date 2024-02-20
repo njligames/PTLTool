@@ -1,5 +1,19 @@
 # PTLTool
 I made this tool to make it easier to find emails from a list of emails.
+
+## Table of Contents
+
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Installing](#installing)
+- [Usage](#usage)
+- [Todo](#todo)
+- [Contributing](#contributing)
+
+## About
+## Getting Started
+## Installing
+## Usage
 Use cases:
 * Given a list of emails given to you on Slack, determine if they are in your POD.
  * Example
@@ -103,3 +117,4 @@ Use cases:
 ## TODO Features 
 [ ] - use ChatGPT to get an inspirational message for the `daily.py` script. 
 [X] - put a star :star: before the name of people above 15 hours.
+## Contributing
