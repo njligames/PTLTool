@@ -61,14 +61,6 @@ if "Saturday" == day_of_week:
 if "Sunday" == day_of_week:
     days_left = "zero days left"
 
-manager_string = "The project manager contacts are as follows:\n"
-with open("data/PTL Platinum Project Directory - Coding.csv") as csvfile:
-    reader = csv.DictReader(csvfile)
-
-    indent = "\t\t"
-    for row in reader:
-        manager_string += indent + row["Project Name"] + " - " + row["Point of Contact"] + "\n"
-
 top_message = """
 :star2: Good day, Platinum Coders! :rocket:
 Today is {}, {}
