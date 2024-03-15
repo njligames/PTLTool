@@ -4,6 +4,11 @@
 import sys
 import csv
 import json
+import operator
+import datetime
+from datetime import date
+from datetime import datetime
+from datetime import timedelta
 
 audit_filename=None
 if(len(sys.argv) > 1):
@@ -16,13 +21,15 @@ audit_2week = []
 audit_3week = []
 audit_4week = []
 audit_color = []
+audit_status = []
 
+# WORKER_ID,WORKER_EMAIL,PLAT_STAT,This week,Last week,2 weeks ago,3 weeks ago,4 weeks ago,5 weeks ago,Average Hours,Robot,Status,TL,Start date,Z Score,NOTICE_2,NOTICE_3,CHEATING,CANNOT_BE_PLATINUM
 try:
     with open(audit_filename) as csvfile:
         reader = csv.DictReader(csvfile)
 
         for row in reader:
-            if "james".lower() == row["PTL"].lower():
+            if "james".lower() == row["TL"].lower():
                 audit_emails.append(row["WORKER_EMAIL"])
                 audit_thisweek.append(row["This week"])
                 audit_lastweek.append(row["Last week"])
@@ -30,6 +37,7 @@ try:
                 audit_3week.append(row["3 weeks ago"])
                 audit_4week.append(row["4 weeks ago"])
                 audit_color.append(row["Robot"].lower())
+                audit_status.append(row["Status"].lower())
 
 except Exception as e:
     print(e, file=sys.stderr)
@@ -48,12 +56,22 @@ def textUpdate(color):
         message = ""
     return message
 
+def textStatus(status):
+    message = ""
+
+    if "on track" == status:
+        message = "You are completing your hours! :thumbsup:\n"
+    elif "off track" == status:
+        message = "Remotasks wants me to contact you to improve your hours.\n"
+
+    return message
 
 
+name_dict = {}
 for i in range(len(audit_emails)):
-    print("*****************************************")
+    print("\n*****************************************\n")
     message = "Hello! I have been given the weekly update for your hours." + "\n"
-    message += textUpdate(audit_color[i].lower()) + "\n"
+    message += textStatus(audit_status[i].lower())
     message += audit_emails[i] + "\n"
     message += "Hours:\n"
     message += "\tThis week: " + audit_thisweek[i] + "\n"
@@ -62,15 +80,42 @@ for i in range(len(audit_emails)):
     message += "\t3 weeks ago: " + audit_3week[i] + "\n"
     message += "\t4 weeks ago: " + audit_4week[i] + "\n"
     message += "You will be kept as a platinum tasker if you meet these three principles...\n"
-    message += "\t1. Time - Minimum 15 hours\n"
+    message += "\t1. Time - Minimum 15 hours. (3 of the 5 weeks should be 15 hours or more)\n"
     message += "\t2. Quality - 4/5 or 5/5 stars\n"
     message += "\t3. Communication - Please refer to the daily thread in our POD.\n"
+    message += "*** 3/5 weeks have to be 15 hours or more."
+
+    name_dict[audit_emails[i]] = float(audit_lastweek[i])
 
     print(message)
 
-# :medium-risk:How we can read the weekly hours report?:medium-risk:
-# Green: The Platinum Experts are completing the hours! :thumbs:
-# Yellow: We recommend to contact the Experts so they can improve their hours.
-# Red: Please inform the Experts that they are not meeting the expected hourly commitment and provide specific comments about their overall performance.
-# You can always appeal for someone, in that case they will appear as Red-Appeal (in case the appeal was accepted)
-# Red-Demotion: There isn’t a possibility to appeal and demotion is imperative (0 hours in 5 weeks).
+cross_name_dict = {}
+now = datetime.now()
+d = date(now.year, now.month, now.day)
+d = d - timedelta(days=1)
+try:
+    filename="data/yesterday/" + str(d) + ".csv"
+    with open(filename) as csvfile:
+        reader = csv.DictReader(csvfile)
+
+        for row in reader:
+            cross_name_dict[row["email"]] = row["name"]
+except Exception as e:
+    pass
+
+message = "Leader Board\n"
+message += "2/26/2023 to 3/3/2023" + "\n"
+
+i = 1
+for item in sorted(name_dict.items(), key=operator.itemgetter(1), reverse=True):
+    email = item[0]
+    hours = item[1]
+    if email in cross_name_dict.keys():
+        name = cross_name_dict[email]
+    else:
+        name = "N/A"
+
+    message += "#" + str(i) + "\t@" + name + " with " + str(hours) + " hours\n"
+    i += 1
+
+print(message)

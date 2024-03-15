@@ -19,3 +19,4 @@ for a in ans:
     print(prompt[i] + ": " + a)
     i+=1
 print("\n\n****************************")
+
